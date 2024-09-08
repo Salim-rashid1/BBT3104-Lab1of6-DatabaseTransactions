@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+
+# Be patient and wait for the server to display "ready for connections" in the
+# logs. There are a total of 4 "ready for connections" messages in the logs.
+
+  mysql:
+    image: mysql:latest
+    hostname: mysql-latest-bbt3104
+    container_name: mysql-latest-bbt3104
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 5trathm0re
+    volumes:
+      - ./container-volumes/mysql/etc-mysql-conf.d:/etc/mysql/conf.d
+      - ./container-volumes/mysql/sample-data:/docker-entrypoint-initdb.d/
+      - ./container-volumes/mysql/var-lib-mysql:/var/lib/mysql
