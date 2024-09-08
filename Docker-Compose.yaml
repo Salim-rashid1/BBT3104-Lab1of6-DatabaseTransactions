@@ -1,9 +1,6 @@
 version: "3.9"
 services:
 
-# Be patient and wait for the server to display "ready for connections" in the
-# logs. There are a total of 4 "ready for connections" messages in the logs.
-
   mysql:
     image: mysql:latest
     hostname: mysql-latest-bbt3104
@@ -13,6 +10,15 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 5trathm0re
     volumes:
-      - ./container-volumes/mysql/etc-mysql-conf.d:/etc/mysql/conf.d
+      - ./container-volumes/mysql/etc-mysql/my.cnf:/etc/mysql/my.cnf
       - ./container-volumes/mysql/sample-data:/docker-entrypoint-initdb.d/
       - ./container-volumes/mysql/var-lib-mysql:/var/lib/mysql
+    entrypoint: ["/bin/bash", "-c", "chmod 644 /etc/mysql/my.cnf && docker-entrypoint.sh mysqld"]
+
+# docker exec -it mysql-latest-bbt3104 mysql -uroot -p
+# SHOW VARIABLES LIKE 'autocommit';
+# SHOW VARIABLES LIKE 'event_scheduler';
+# SHOW VARIABLES LIKE 'transaction-isolation';
+
+# docker exec -it mysql-latest-bbt3104 bash
+# cat /etc/mysql/my.cnf
