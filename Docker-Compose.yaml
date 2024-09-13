@@ -1,4 +1,3 @@
-version: "3.9"
 services:
 
   mysql:
@@ -14,11 +13,3 @@ services:
       - ./container-volumes/mysql/sample-data:/docker-entrypoint-initdb.d/
       - ./container-volumes/mysql/var-lib-mysql:/var/lib/mysql
     entrypoint: ["/bin/bash", "-c", "chmod 644 /etc/mysql/my.cnf && docker-entrypoint.sh mysqld"]
-
-# docker exec -it mysql-latest-bbt3104 mysql -uroot -p
-# SHOW VARIABLES LIKE 'autocommit';
-# SHOW VARIABLES LIKE 'event_scheduler';
-# SHOW VARIABLES LIKE 'transaction-isolation';
-
-# docker exec -it mysql-latest-bbt3104 bash
-# cat /etc/mysql/my.cnf
